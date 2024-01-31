@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 import '../src/constants.dart';
 import '../src/emoji_input_formatter.dart';
@@ -244,37 +245,33 @@ class _MarkdownAutoPreviewState extends State<MarkdownAutoPreview> {
       },
 
       onFocusChange: (focus) {
-        setState(() {
-          _focused = focus;
-        });
-
-        if (_focused) _internalFocus.requestFocus(_textFieldFocusNode);
+        // setState(() {
+        //   _focused = focus;
+        // });
+        //
+        // if (_focused) _internalFocus.requestFocus(_textFieldFocusNode);
       },
       // canRequestFocus: false,
       focusNode: _internalFocus,
-      child: Container(),
-      // child: _focused
-      //     ? _editorOnFocused()
-      //     : GestureDetector(
-      //         onTap: () {
-      //           // Bring widget in widget tree first
-      //           setState(() {
-      //             _focused = true;
-      //           });
-      //
-      //           // Then request for focus when widget is built
-      //           _textFieldFocusNode.requestFocus();
-      //         },
-      //         child: Align(
-      //           alignment: Alignment.centerLeft,
-      //           child: MarkdownBody(
-      //             key: const ValueKey<String>("zmarkdown-parse-body"),
-      //             data: _internalController.text == ""
-      //                 ? "Click to open the MarkDown"
-      //                 : _internalController.text,
-      //           ),
-      //         ),
-      //       ),
+      child: _focused
+          ? _editorOnFocused()
+          : GestureDetector(
+              onTap: () {
+                // Bring widget in widget tree first
+                setState(() {
+                  _focused = true;
+                });
+
+                // Then request for focus when widget is built
+                _textFieldFocusNode.requestFocus();
+              },
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: MarkdownBody(
+                    key: const ValueKey<String>("zmarkdown-parse-body"),
+                    data: "Click to open the markup"),
+              ),
+            ),
     );
   }
 
