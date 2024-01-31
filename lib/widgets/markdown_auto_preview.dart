@@ -295,15 +295,15 @@ class _MarkdownAutoPreviewState extends State<MarkdownAutoPreview> {
                   controller: _internalController,
                   autoCloseAfterSelectEmoji: widget.autoCloseAfterSelectEmoji,
                   toolbar: _toolbar,
-                  onPreviewChanged: () {
-                    // Remove focus first
-                    _internalFocus.unfocus();
-
-                    // Then remove widget from widget tree
-                    setState(() {
-                      _focused = !_focused;
-                    });
-                  },
+                  // onPreviewChanged: () {
+                  //   // Remove focus first
+                  //   _internalFocus.unfocus();
+                  //
+                  //   // Then remove widget from widget tree
+                  //   setState(() {
+                  //     _focused = !_focused;
+                  //   });
+                  // },
                   unfocus: () {
                     _internalFocus.unfocus();
                   },
