@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+
 import '../src/constants.dart';
 import '../src/emoji_input_formatter.dart';
 import '../src/toolbar.dart';
@@ -191,7 +192,7 @@ class _MarkdownAutoPreviewState extends State<MarkdownAutoPreview> {
 
   late Toolbar _toolbar;
 
-  bool _focused = false;
+  bool _focused = true;
 
   @override
   void initState() {
