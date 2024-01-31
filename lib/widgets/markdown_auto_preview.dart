@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 
 import '../src/constants.dart';
 import '../src/emoji_input_formatter.dart';
@@ -217,62 +216,63 @@ class _MarkdownAutoPreviewState extends State<MarkdownAutoPreview> {
   @override
   Widget build(BuildContext context) {
     return FocusableActionDetector(
-      shortcuts: {
-        LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyB):
-            BoldTextIntent(),
-        LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyI):
-            ItalicTextIntent(),
-      },
-      actions: {
-        BoldTextIntent: CallbackAction<BoldTextIntent>(
-          onInvoke: (intent) {
-            _toolbar.action("**", "**");
+        shortcuts: {
+          LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyB):
+              BoldTextIntent(),
+          LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyI):
+              ItalicTextIntent(),
+        },
+        actions: {
+          BoldTextIntent: CallbackAction<BoldTextIntent>(
+            onInvoke: (intent) {
+              _toolbar.action("**", "**");
 
-            // onActionCompleted
-            // setState(() {});
-            return null;
-          },
-        ),
-        ItalicTextIntent: CallbackAction<ItalicTextIntent>(
-          onInvoke: (intent) {
-            _toolbar.action("_", "_");
+              // onActionCompleted
+              // setState(() {});
+              return null;
+            },
+          ),
+          ItalicTextIntent: CallbackAction<ItalicTextIntent>(
+            onInvoke: (intent) {
+              _toolbar.action("_", "_");
 
-            // onActionCompleted
-            // setState(() {});
-            return null;
-          },
-        ),
-      },
-
-      onFocusChange: (focus) {
-        // setState(() {
-        //   _focused = focus;
-        // });
+              // onActionCompleted
+              // setState(() {});
+              return null;
+            },
+          ),
+        },
+        onFocusChange: (focus) {
+          // setState(() {
+          //   _focused = focus;
+          // });
+          //
+          // if (_focused) _internalFocus.requestFocus(_textFieldFocusNode);
+        },
+        // canRequestFocus: false,
+        focusNode: _internalFocus,
+        child:
+            // _focused
+            //     ?
+            _editorOnFocused()
+        // : GestureDetector(
+        //     onTap: () {
+        //       // Bring widget in widget tree first
+        //       setState(() {
+        //         _focused = true;
+        //       });
         //
-        // if (_focused) _internalFocus.requestFocus(_textFieldFocusNode);
-      },
-      // canRequestFocus: false,
-      focusNode: _internalFocus,
-      child: _focused
-          ? _editorOnFocused()
-          : GestureDetector(
-              onTap: () {
-                // Bring widget in widget tree first
-                setState(() {
-                  _focused = true;
-                });
-
-                // Then request for focus when widget is built
-                _textFieldFocusNode.requestFocus();
-              },
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: MarkdownBody(
-                    key: const ValueKey<String>("zmarkdown-parse-body"),
-                    data: "Click to open the markup"),
-              ),
-            ),
-    );
+        //       // Then request for focus when widget is built
+        //       _textFieldFocusNode.requestFocus();
+        //     },
+        //     child: Align(
+        //       alignment: Alignment.centerLeft,
+        //       child: MarkdownBody(
+        //           key: const ValueKey<String>("zmarkdown-parse-body"),
+        //           data: "Click to open the markup"),
+        //     ),
+        //   ),
+        );
   }
 
   Widget _editorOnFocused() {
